@@ -16,7 +16,7 @@ class PinsController extends AbstractController
      */
     public function index(PinRepository $pinRepository):Response
     {
-        $pins= $pinRepository->findBy([],['createdAt'=>'DESC']);
+        $pins= $pinRepository->findBy([]);
         return $this->render('pins/index.html.twig', compact('pins'));
     }
 
