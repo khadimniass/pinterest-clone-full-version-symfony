@@ -78,15 +78,11 @@ class PinsController extends AbstractController
         ]);
     }
         /**
-     * @Route("/pins/{id<[0-9]+>}/delete", name="app_pins_delete", methods={"GET","POST","DELETE"})
+     * @Route("/pins/{id<[0-9]+>}/delete", name="app_pins_delete", methods={"GET"})
      */
 
     public function delete(EntityManagerInterface $em,Pin $pin) :Response
     {
-        $em->remove($pin);
-        $em->flush();
-
-        return $this->redirectToRoute('app_home');
-
+        
     }
 }

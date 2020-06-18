@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title pin.title %}
+
+{% block body %}
+    <article>
+        <h1> {{pin.title}} </h1>
+        <p> {{pin.description}} </p>
+    <article>
+    <a href="{{path('app_pins_edit',{id:pin.id})}}" >Edit</a>
+    <a href="{{path('app_pins_delete',{id:pin.id})}}" >Delete</a>
+    <a href="{{path('app_home')}}" >Back</a>
+
+    <form id="js-pin-delete-form" action="{{path('app_pins_delete',{id:pin.id})}}" method="POST" style="display:none;">
+    <input type="hidden" name="_methode" value="DELETE">
+    </form>
+{% endblock %}
