@@ -38,6 +38,7 @@ class PinsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
+            $data=$form->getData();
             $em->persist($pin);
             $em->flush();
 
@@ -56,30 +57,5 @@ class PinsController extends AbstractController
     public function show(Pin $pin) :Response
     {
         return $this->render('pins/show.html.twig', compact('pin'));
-    }
-
-    /**
-     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request,EntityManagerInterface $em,Pin $pin) :Response
-    {
-        $form=$this->createFormBuilder($pin)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->getForm()
-        ;
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid() ) {
-            $em->flush();
-
-            return $this->redirectToRoute('app_home');
-
-        }
-
-        return $this->render('pins/edit.html.twig',[
-            'pin'=>$pin,
-            'form'=>$form->createView()
-        ]);
     }
 }
