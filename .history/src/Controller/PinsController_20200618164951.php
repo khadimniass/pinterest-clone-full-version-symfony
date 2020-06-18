@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\PinType;
+
 
 class PinsController extends AbstractController
 {
@@ -30,8 +30,8 @@ class PinsController extends AbstractController
     public function create(Request $request,EntityManagerInterface $em):Response
     {
         $pin=new Pin;
-        $form=$this->createForm(PinType::class,$pin); //importer PinType
-
+        $form=$this->createForm($pin);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
@@ -58,12 +58,14 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET","POST"})
      */
-
-     public function edit(Request $request,EntityManagerInterface $em,Pin $pin) :Response
+    public function edit(Request $request,EntityManagerInterface $em,Pin $pin) :Response
     {
-       $form=$this->createForm(PinType::class, $pin);
-        
-       $form->handleRequest($request);
+        $form=$this->createFormBuilder($pin)
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->getForm()
+        ;
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
             $em->flush();

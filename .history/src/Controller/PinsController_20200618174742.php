@@ -61,7 +61,7 @@ class PinsController extends AbstractController
 
      public function edit(Request $request,EntityManagerInterface $em,Pin $pin) :Response
     {
-       $form=$this->createForm(PinType::class, $pin);
+       $form=$this->createForm(PinType::class, $pin]);
         
        $form->handleRequest($request);
 
