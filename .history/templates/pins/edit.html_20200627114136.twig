@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'New Pin' %}
+{% block title 'Edit Pin #'~ pin.id %}
 
 {% block body %}
-    <h1>Create pin</h1>
+    <h1>Edit pin #{{pin.id}} </h1>
 
 {{ include ('pins/_form.html.twig')}}
+
 
 {% endblock %}
