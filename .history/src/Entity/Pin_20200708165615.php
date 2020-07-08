@@ -23,15 +23,12 @@ class Pin
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le tittre ne doit pas être vide !")
-     * @Assert\Length(min=3,minMessage="Le tittre est trop petit")
+     * Assert\NotBlank
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="La description ne doit pas être vide !")
-     * @Assert\Length(min=10,minMessage="La description est trop petite")
      */
     private $description;
 
