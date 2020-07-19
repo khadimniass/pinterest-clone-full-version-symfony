@@ -42,6 +42,7 @@ class Pin
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
+     * @Assert\image(maxSize="8M")
      *
      * @var File|null
      */
@@ -88,11 +89,13 @@ class Pin
     {
         $this->imageFile = $imageFile;
 
+        //Sans cette condition, on ne peut pas modifier l'image
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->setUpdatedAt( new \DateTimeImmutable);
         }
+
     }
 
     public function getImageFile(): ?File
