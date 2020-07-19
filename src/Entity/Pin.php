@@ -45,7 +45,7 @@ class Pin
      *
      * @var File|null
      */
-
+    private $imageFile;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
