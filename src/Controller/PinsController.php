@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pin;
 use App\Repository\PinRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +28,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/create", name="app_pins_create", methods={"GET","POST"})
      */
-    public function create(Request $request,EntityManagerInterface $em):Response
+    public function create(Request $request,EntityManagerInterface $em, UserRepository $userRep):Response
     {
         $pin=new Pin;
         $form=$this->createForm(PinType::class,$pin); //importer PinType
@@ -35,6 +36,10 @@ class PinsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
+            //Debut anrangement Pour empecher des erreur innantendues
+            $niass=$userRep->findOneBy(['email'=>'ahmadou@exple.com']);
+            $pin->setUser($niass);
+            //Fin
             $em->persist($pin);
             $em->flush();
 
