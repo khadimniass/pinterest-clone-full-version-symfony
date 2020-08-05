@@ -99,6 +99,11 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getfirstName().' '.$this->getLastName() ;
+    }
+
     /**
      * A visual identifier that represents this user.
      *

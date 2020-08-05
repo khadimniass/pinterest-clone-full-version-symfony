@@ -15,10 +15,10 @@
                 <h1 class="pl-3 pt-3 h5"> <a href="{{ path('app_pins_show', {id:pin.id}) }}" class="text-secondary text-decoration-none"> {{ pin.title }}</a></h1>
                 <p class="pl-3 pb-3 text-muted">
                     <small>
-                        Submitted
-                        <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>
-
-                        by [OWNER FULL NAME.]
+                         <p class="pl-3 pb-3 text-muted">
+                            Submitted by {{pin.user.fullName }}
+                            <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>
+                         </p>
                     </small>
                 </p>
                 <p class="pl-3 pb-3">
@@ -36,7 +36,7 @@
                         <input type="hidden" name="_methode" value="DELETE">
                     </form>
                 </div>
-                <article>
+             </article>
         </div>
     </div>
 {% endblock %}
