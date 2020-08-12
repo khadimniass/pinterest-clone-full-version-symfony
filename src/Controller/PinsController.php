@@ -45,9 +45,7 @@ class PinsController extends AbstractController
 
             $this->addFlash('success','Pin créé avec succès !');
             return $this->redirectToRoute('app_home');
-
         }
-
         return $this->render('pins/create.html.twig',[
             'form'=>$form->createView()
         ]);
@@ -56,6 +54,7 @@ class PinsController extends AbstractController
      /**
      * @Route("/pins/{id<[0-9]+>}", name="app_pins_show", methods="GET")
      */
+
     public function show(Pin $pin) :Response
     {
         return $this->render('pins/show.html.twig', compact('pin'));
@@ -73,14 +72,9 @@ class PinsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() ) {
             $em->flush();
-
-
             $this->addFlash('success','Pin modifié avec succès !');
-
             return $this->redirectToRoute('app_home');
-
         }
-
         return $this->render('pins/edit.html.twig',[
             'pin'=>$pin,
             'form'=>$form->createView()
@@ -95,14 +89,8 @@ class PinsController extends AbstractController
         if ($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(),$request->request->get('csrf_token'))) {
             $em->remove($pin);
             $em->flush();
-            
-
             $this->addFlash('info','Pin effacé avec succès !');
-
         }
-        
-
         return $this->redirectToRoute('app_home');
-
     }
 }

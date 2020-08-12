@@ -7,13 +7,12 @@
         <div class="col-md-6 mx-auto">
             <article class="pin bg-white rounded shadow">
                 <div class="mw-100 overflow-hidden rounded-top">
-                    <a href="{{ path('app_pins_show', {id:pin.id})}}">
                         <img src="{{ (pin.imageName ? vich_uploader_asset(pin) :asset('build/images/choose.jpg'))  | imagine_filter('squared_thumbnail_medium') }}"
                              alt="{{ pin.title }}" class="w-100 "/>
-                    </a>
                 </div>
-                <h1 class="pl-3 pt-3 h5"> <a href="{{ path('app_pins_show', {id:pin.id}) }}" class="text-secondary text-decoration-none"> {{ pin.title }}</a></h1>
-                <p class="pl-3 pb-3 text-muted">
+            <div class="p-3">
+                <h1 class=" h5 text-secondary"> {{ pin.title }}</h1>
+                <p class="text-muted">
                     <small>
                          <p class="pl-3 pb-3 text-muted">
                             Submitted by {{pin.user.fullName }}
@@ -21,10 +20,10 @@
                          </p>
                     </small>
                 </p>
-                <p class="pl-3 pb-3">
+                <p class="pr-3 pt-3 text-break">
                     {{ pin.description}}
                 </p>
-                <div class="pl-3 pb-3">
+                <div class="pt-3">
                     <a href="{{path('app_pins_edit',{id:pin.id})}}" class="btn btn-light">Edit</a>
                     <a href="#" onclick="event.preventDefault(); confirm('Veut-tu vraiment effacer ?')
                             &&document.getElementById('js-pin-delete-form').submit();"class="btn btn-light">
@@ -36,7 +35,9 @@
                         <input type="hidden" name="_methode" value="DELETE">
                     </form>
                 </div>
+            </div>
              </article>
+        </div>
         </div>
     </div>
 {% endblock %}
